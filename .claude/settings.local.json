@@ -9,7 +9,16 @@
       "Bash(npm run:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(git remote:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(ls /Users/david/Downloads/silver-blue-pool-care/*.png)",
+      "Bash(cp \"/Users/david/Documents/Silver Blue Site Images/AdobeStock_131179423.jpeg\" /Users/david/Downloads/silver-blue-pool-care/public/pool-vacuum.jpeg)",
+      "Bash(cp \"/Users/david/Documents/Silver Blue Site Images/AdobeStock_440974917.jpeg\" /Users/david/Downloads/silver-blue-pool-care/public/chemical-testing.jpeg)",
+      "Bash(cp \"/Users/david/Documents/Silver Blue Site Images/AdobeStock_484692189.jpeg\" /Users/david/Downloads/silver-blue-pool-care/public/desert-pool-sunset.jpeg)",
+      "Bash(cp \"/Users/david/Documents/Silver Blue Site Images/AdobeStock_529333797.jpeg\" /Users/david/Downloads/silver-blue-pool-care/public/luxury-pool-sunset.jpeg)",
+      "Bash(cp \"/Users/david/Documents/Silver Blue Site Images/AdobeStock_749642316.jpeg\" /Users/david/Downloads/silver-blue-pool-care/public/tech-cleaning-aerial.jpeg)"
     ]
   }
 }

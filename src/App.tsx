@@ -72,7 +72,7 @@ const Navbar = () => {
           <img
             src="/logo-horizontal.png"
             alt="Silver Blue Pool Care"
-            className={`h-10 w-auto transition-all group-hover:scale-105 ${isScrolled ? '' : 'brightness-0 invert'}`}
+            className="h-10 w-auto transition-all group-hover:scale-105"
           />
         </a>
 
@@ -156,10 +156,9 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&auto=format&fit=crop"
+          src="/hero-pool.jpeg"
           alt="Luxury Las Vegas Pool"
           className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A4F7A]/90 via-[#1A4F7A]/50 to-pool-blue/10"></div>
       </div>
@@ -295,10 +294,9 @@ const Services = () => {
       {/* Faded background image */}
       <div className="absolute inset-0 opacity-10">
         <img
-          src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=1920&q=80&auto=format&fit=crop"
+          src="/tech-cleaning-aerial.jpeg"
           alt=""
           className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
         />
       </div>
 
@@ -398,11 +396,6 @@ const WhyChooseUs = () => {
       icon: <ShieldCheck className="text-deep-blue" />,
     },
     {
-      title: 'Same Tech Every Visit',
-      desc: 'Consistency matters. You\'ll always know who is in your backyard.',
-      icon: <UserCheck className="text-deep-blue" />,
-    },
-    {
       title: 'Satisfaction Guarantee',
       desc: 'If it\'s not right, we come back and fix it for free. No questions asked.',
       icon: <CheckCircle2 className="text-deep-blue" />,
@@ -436,10 +429,9 @@ const WhyChooseUs = () => {
         <div className="lg:w-1/2 relative">
           <div className="rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pool-blue/20">
             <img
-              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80&auto=format&fit=crop"
+              src="/luxury-pool-sunset.jpeg"
               alt="Professional Pool Service"
               className="w-full h-auto"
-              referrerPolicy="no-referrer"
             />
           </div>
           <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-xl border border-silver/10 hidden md:block">
@@ -460,11 +452,27 @@ const WhyChooseUs = () => {
 const Pricing = () => {
   const plans = [
     {
+      name: 'One-Time Clean',
+      price: 'Starting at $150',
+      period: ' flat',
+      badge: 'No Commitment',
+      features: [
+        'Full deep clean',
+        'Chemical balance',
+        'Filter check',
+        'Single visit — no contracts',
+        'Perfect for parties or move-ins',
+      ],
+      cta: 'Book a One-Time Visit',
+      popular: false,
+    },
+    {
       name: 'Standard',
       price: 'Starting at $120',
-      period: '/mo',
+      period: '/month',
+      badge: 'Weekly Visits',
       features: [
-        'Weekly cleaning',
+        'Weekly pool cleaning',
         'Chemical check & balance',
         'Filter inspection',
         'Skimming & brushing',
@@ -476,7 +484,8 @@ const Pricing = () => {
     {
       name: 'Premium',
       price: 'Starting at $165',
-      period: '/mo',
+      period: '/month',
+      badge: 'Weekly Visits',
       features: [
         'Everything in Standard',
         'Monthly deep clean',
@@ -487,20 +496,6 @@ const Pricing = () => {
       cta: 'Get Premium Quote',
       popular: true,
     },
-    {
-      name: 'One-Time Clean',
-      price: 'Starting at $150',
-      period: ' flat',
-      features: [
-        'Full deep clean',
-        'Chemical balance',
-        'Filter check',
-        'No commitment',
-        'Perfect for parties',
-      ],
-      cta: 'Book One-Time',
-      popular: false,
-    },
   ];
 
   return (
@@ -508,7 +503,7 @@ const Pricing = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-charcoal/60">All prices vary by pool size and condition. Request your personalized quote below.</p>
+          <p className="text-charcoal/60">Need a one-time visit or regular weekly service? We do both — no long-term contracts required. Prices vary by pool size.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start">
@@ -530,7 +525,12 @@ const Pricing = () => {
                   Most Popular
                 </div>
               )}
-              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+              <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
+              {plan.badge && (
+                <span className="inline-block text-xs font-semibold text-pool-blue bg-pool-blue/10 px-3 py-0.5 rounded-full mb-3">
+                  {plan.badge}
+                </span>
+              )}
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-2xl font-bold">{plan.price}</span>
                 <span className="text-charcoal/60 text-sm">{plan.period}</span>
@@ -590,11 +590,11 @@ const Pricing = () => {
 
 const GalleryStrip = () => {
   const photos = [
-    'photo-1571902943202-507ec2618e8f',
-    'photo-1561489401-f8ea3131dc68',
-    'photo-1572331165267-854da2b10ccc',
-    'photo-1600585154340-be6161a56a0c',
-    'photo-1544551763-46a013bb70d5',
+    { src: '/desert-pool-sunset.jpeg', alt: 'Desert pool at sunset' },
+    { src: '/before-after.jpeg', alt: 'Pool before and after cleaning' },
+    { src: '/pool-vacuum.jpeg', alt: 'Pool vacuum equipment in action' },
+    { src: '/chemical-testing.jpeg', alt: 'Chemical testing and balancing' },
+    { src: '/underwater-vacuum.jpeg', alt: 'Underwater pool cleaning' },
   ];
 
   return (
@@ -605,7 +605,7 @@ const GalleryStrip = () => {
         </h2>
       </div>
       <div className="flex gap-4 overflow-x-auto pb-4 px-6 md:px-12" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) rgba(255,255,255,0.05)' }}>
-        {photos.map((photoId, i) => (
+        {photos.map((photo, i) => (
           <motion.div
             key={i}
             whileHover={{ scale: 1.03 }}
@@ -613,10 +613,9 @@ const GalleryStrip = () => {
             className="flex-shrink-0 w-72 h-48 md:w-96 md:h-64 rounded-2xl overflow-hidden relative group"
           >
             <img
-              src={`https://images.unsplash.com/${photoId}?w=600&q=80&auto=format&fit=crop`}
-              alt={`Pool ${i + 1}`}
+              src={photo.src}
+              alt={photo.alt}
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.div>
@@ -887,7 +886,7 @@ const Footer = () => {
               <img
                 src="/logo-horizontal.png"
                 alt="Silver Blue Pool Care"
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto"
               />
             </a>
             <p className="text-white/50 leading-relaxed mb-6">
