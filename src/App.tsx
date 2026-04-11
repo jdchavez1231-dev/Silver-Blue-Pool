@@ -5,22 +5,22 @@
 
 import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Droplets, 
-  ShieldCheck, 
-  UserCheck, 
-  Calendar, 
-  CheckCircle2, 
-  Menu, 
-  X, 
-  Phone, 
-  Mail, 
-  MapPin, 
+import {
+  Droplets,
+  ShieldCheck,
+  UserCheck,
+  Calendar,
+  CheckCircle2,
+  Menu,
+  X,
+  Phone,
+  Mail,
+  MapPin,
   Star,
   ArrowRight,
   Filter,
   Zap,
-  Waves
+  Waves,
 } from 'lucide-react';
 
 // --- Sticky Mobile CTA ---
@@ -79,16 +79,16 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.name}
+              href={link.href}
               className={`text-sm font-medium transition-colors hover:text-deep-blue ${isScrolled ? 'text-charcoal' : 'text-white/90'}`}
             >
               {link.name}
             </a>
           ))}
-          <a 
-            href="#contact" 
+          <a
+            href="#contact"
             className="bg-deep-blue text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-deep-blue/90 transition-all hover:shadow-lg active:scale-95"
           >
             Get a Quote
@@ -96,7 +96,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -111,7 +111,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -119,17 +119,17 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
+                <a
+                  key={link.name}
+                  href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-lg font-medium text-charcoal hover:text-deep-blue py-2"
                 >
                   {link.name}
                 </a>
               ))}
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="bg-deep-blue text-white px-6 py-4 rounded-xl text-center font-bold"
               >
@@ -144,80 +144,123 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const stats = [
+    { number: '500+', label: 'Pools Serviced' },
+    { number: '5+', label: 'Years in Las Vegas' },
+    { number: '4.9★', label: 'Google Rating' },
+    { number: '100%', label: 'Satisfaction' },
+  ];
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1920&q=80&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&auto=format&fit=crop"
           alt="Luxury Las Vegas Pool"
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A4F7A]/90 via-[#1A4F7A]/50 to-pool-blue/10"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl"
-        >
-          <span className="inline-block px-4 py-1.5 bg-deep-blue/20 backdrop-blur-sm border border-deep-blue/30 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-6">
-            Las Vegas's Most Trusted Pool Care
-          </span>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] text-balance">
-            Crystal Clear Pools. <br />
-            <span className="text-silver">Every Single Week.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-xl">
-            Las Vegas's most reliable pool cleaning service — fully insured, background-checked technicians, and a <strong className="text-white">100% satisfaction guarantee</strong> on every visit.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="#contact"
-              className="bg-deep-blue text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-deep-blue/90 transition-all hover:shadow-xl flex items-center justify-center gap-2 group"
-            >
-              Get a Free Quote
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="tel:7025550123"
-              className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"
-            >
-              <Phone size={20} />
-              (702) 555-0123
-            </a>
-          </div>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Headline + CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block px-4 py-1.5 bg-pool-blue/20 backdrop-blur-sm border border-pool-blue/30 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-6">
+              Las Vegas's Most Trusted Pool Care
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] text-balance">
+              Crystal Clear Pools. <br />
+              <span className="text-pool-blue">Every Single Week.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-xl">
+              Las Vegas's most reliable pool cleaning service — fully insured, background-checked technicians, and a <strong className="text-white">100% satisfaction guarantee</strong> on every visit.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#contact"
+                className="bg-white text-deep-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:shadow-xl flex items-center justify-center gap-2 group"
+              >
+                Get a Free Quote
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="tel:7025550123"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"
+              >
+                <Phone size={20} />
+                (702) 555-0123
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right: Floating stat cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="grid grid-cols-2 gap-4 hidden lg:grid"
+          >
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 text-white"
+              >
+                <div className="text-4xl font-bold font-display mb-1">{stat.number}</div>
+                <div className="text-xs text-white/60 uppercase tracking-wider font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      {/* Trust Bar */}
-      <div className="absolute bottom-0 w-full bg-white/5 backdrop-blur-xl border-t border-white/10 py-6">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-white/70 text-sm font-medium uppercase tracking-wider">
-            <div className="flex items-center gap-2">
-              <Star size={16} className="text-silver" />
-              <span>500+ Happy Clients</span>
+      {/* SVG Wave Transition */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+        <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-16 md:h-20">
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#1C1C1E" />
+        </svg>
+      </div>
+    </section>
+  );
+};
+
+const StatsStrip = () => {
+  const stats = [
+    { number: '500+', label: 'Pools Serviced' },
+    { number: '5+', label: 'Years in Las Vegas' },
+    { number: '4.9★', label: 'Average Rating' },
+    { number: '100%', label: 'Satisfaction Guarantee' },
+  ];
+
+  return (
+    <section className="bg-charcoal py-16 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x divide-white/10">
+        {stats.map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="text-center px-8 py-6 md:py-0"
+          >
+            <div className="text-5xl md:text-6xl font-bold font-display text-white mb-2">
+              {stat.number}
             </div>
-            <div className="hidden sm:block w-1 h-1 bg-white/30 rounded-full"></div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-silver" />
-              <span>Licensed & Insured</span>
+            <div className="text-sm text-white/50 uppercase tracking-widest font-medium">
+              {stat.label}
             </div>
-            <div className="hidden sm:block w-1 h-1 bg-white/30 rounded-full"></div>
-            <div className="flex items-center gap-2">
-              <UserCheck size={16} className="text-silver" />
-              <span>Same Technician Every Visit</span>
-            </div>
-            <div className="hidden sm:block w-1 h-1 bg-white/30 rounded-full"></div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-silver" />
-              <span>No Contracts</span>
-            </div>
-          </div>
-        </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
@@ -226,52 +269,62 @@ const Hero = () => {
 const Services = () => {
   const services = [
     {
-      title: "Weekly Pool Cleaning",
-      desc: "Comprehensive care including skimming, brushing, vacuuming, chemical balancing, and filter checks.",
-      icon: <Droplets className="text-deep-blue" size={32} />,
+      title: 'Weekly Pool Cleaning',
+      desc: 'Comprehensive care including skimming, brushing, vacuuming, chemical balancing, and filter checks.',
+      icon: <Droplets className="text-pool-blue" size={32} />,
     },
     {
-      title: "Chemical Balancing",
-      desc: "Precise water testing and pH correction to ensure safe, algae-free water all year round.",
-      icon: <Waves className="text-deep-blue" size={32} />,
+      title: 'Chemical Balancing',
+      desc: 'Precise water testing and pH correction to ensure safe, algae-free water all year round.',
+      icon: <Waves className="text-pool-blue" size={32} />,
     },
     {
-      title: "Filter Cleaning & Repair",
-      desc: "Deep cleaning, cartridge inspection, and backwashing to keep your equipment running efficiently.",
-      icon: <Filter className="text-deep-blue" size={32} />,
+      title: 'Filter Cleaning & Repair',
+      desc: 'Deep cleaning, cartridge inspection, and backwashing to keep your equipment running efficiently.',
+      icon: <Filter className="text-pool-blue" size={32} />,
     },
     {
-      title: "Algae Treatment",
-      desc: "Same-day response with shock treatment and full brush-down to restore your pool's clarity.",
-      icon: <Zap className="text-deep-blue" size={32} />,
+      title: 'Algae Treatment',
+      desc: 'Same-day response with shock treatment and full brush-down to restore your pool\'s clarity.',
+      icon: <Zap className="text-pool-blue" size={32} />,
     },
   ];
 
   return (
-    <section id="services" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="section-padding bg-deep-blue relative overflow-hidden">
+      {/* Faded background image */}
+      <div className="absolute inset-0 opacity-10">
+        <img
+          src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=1920&q=80&auto=format&fit=crop"
+          alt=""
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Everything Your Pool Needs</h2>
-          <p className="text-lg text-charcoal/60">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Everything Your Pool Needs</h2>
+          <p className="text-lg text-white/60">
             Professional maintenance tailored to the unique demands of the Las Vegas climate.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-3xl bg-silver/5 border border-silver/20 hover:border-deep-blue/30 hover:shadow-xl transition-all group"
+              className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-pool-blue/50 hover:bg-white/10 transition-all group"
             >
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 bg-pool-blue/20 border border-pool-blue/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-charcoal/60 leading-relaxed text-sm">
+              <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
+              <p className="text-white/60 leading-relaxed text-sm">
                 {service.desc}
               </p>
             </motion.div>
@@ -285,19 +338,19 @@ const Services = () => {
 const HowItWorks = () => {
   const steps = [
     {
-      title: "Get a Quote",
-      desc: "Fill out our quick form and get a transparent price in minutes.",
-      num: "01",
+      title: 'Get a Quote',
+      desc: 'Fill out our quick form and get a transparent price in minutes.',
+      num: '01',
     },
     {
-      title: "Schedule Service",
-      desc: "A licensed tech comes to you weekly on a consistent schedule.",
-      num: "02",
+      title: 'Schedule Service',
+      desc: 'A licensed tech comes to you weekly on a consistent schedule.',
+      num: '02',
     },
     {
-      title: "Enjoy Your Pool",
-      desc: "Clean water, handled. Every single week without the stress.",
-      num: "03",
+      title: 'Enjoy Your Pool',
+      desc: 'Clean water, handled. Every single week without the stress.',
+      num: '03',
     },
   ];
 
@@ -308,20 +361,28 @@ const HowItWorks = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple. Reliable. Done.</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          {/* Connector Line */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-silver/30 z-0"></div>
-          
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, i) => (
-            <div key={i} className="relative z-10 text-center">
-              <div className="w-16 h-16 bg-deep-blue text-white rounded-full flex items-center justify-center mx-auto mb-8 text-2xl font-bold shadow-lg shadow-deep-blue/20">
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="relative overflow-hidden rounded-3xl bg-white p-10 shadow-sm border border-silver/20"
+            >
+              {/* Oversized decorative numeral */}
+              <div className="absolute -top-4 -left-2 text-[150px] font-bold font-display leading-none text-deep-blue/8 select-none pointer-events-none">
                 {step.num}
               </div>
-              <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-              <p className="text-charcoal/60 max-w-xs mx-auto">
-                {step.desc}
-              </p>
-            </div>
+              <div className="relative z-10">
+                <div className="w-12 h-1 bg-pool-blue rounded-full mb-6"></div>
+                <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
+                <p className="text-charcoal/60 leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -332,23 +393,23 @@ const HowItWorks = () => {
 const WhyChooseUs = () => {
   const pillars = [
     {
-      title: "Licensed & Insured",
-      desc: "Full protection for your home and our technicians on every visit.",
+      title: 'Licensed & Insured',
+      desc: 'Full protection for your home and our technicians on every visit.',
       icon: <ShieldCheck className="text-deep-blue" />,
     },
     {
-      title: "Same Tech Every Visit",
-      desc: "Consistency matters. You'll always know who is in your backyard.",
+      title: 'Same Tech Every Visit',
+      desc: 'Consistency matters. You\'ll always know who is in your backyard.',
       icon: <UserCheck className="text-deep-blue" />,
     },
     {
-      title: "Satisfaction Guarantee",
-      desc: "If it's not right, we come back and fix it for free. No questions asked.",
+      title: 'Satisfaction Guarantee',
+      desc: 'If it\'s not right, we come back and fix it for free. No questions asked.',
       icon: <CheckCircle2 className="text-deep-blue" />,
     },
     {
-      title: "No Long-Term Contracts",
-      desc: "We earn your trust every week. Cancel or pause anytime.",
+      title: 'No Long-Term Contracts',
+      desc: 'We earn your trust every week. Cancel or pause anytime.',
       icon: <Calendar className="text-deep-blue" />,
     },
   ];
@@ -373,10 +434,10 @@ const WhyChooseUs = () => {
           </div>
         </div>
         <div className="lg:w-1/2 relative">
-          <div className="rounded-3xl overflow-hidden shadow-2xl">
+          <div className="rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pool-blue/20">
             <img
-              src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80&auto=format&fit=crop"
-              alt="Professional Pool Technician"
+              src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80&auto=format&fit=crop"
+              alt="Professional Pool Service"
               className="w-full h-auto"
               referrerPolicy="no-referrer"
             />
@@ -399,45 +460,45 @@ const WhyChooseUs = () => {
 const Pricing = () => {
   const plans = [
     {
-      name: "Standard",
-      price: "$160",
-      period: "/mo",
+      name: 'Standard',
+      price: 'Starting at $120',
+      period: '/mo',
       features: [
-        "Weekly cleaning",
-        "Chemical check & balance",
-        "Filter inspection",
-        "Skimming & brushing",
-        "Vacuuming as needed"
+        'Weekly cleaning',
+        'Chemical check & balance',
+        'Filter inspection',
+        'Skimming & brushing',
+        'Vacuuming as needed',
       ],
-      cta: "Choose Standard",
+      cta: 'Get Standard Quote',
       popular: false,
     },
     {
-      name: "Premium",
-      price: "$195",
-      period: "/mo",
+      name: 'Premium',
+      price: 'Starting at $165',
+      period: '/mo',
       features: [
-        "Everything in Standard",
-        "Monthly deep clean",
-        "Priority scheduling",
-        "Tile scrubbing",
-        "Equipment health report"
+        'Everything in Standard',
+        'Monthly deep clean',
+        'Priority scheduling',
+        'Tile scrubbing',
+        'Equipment health report',
       ],
-      cta: "Choose Premium",
+      cta: 'Get Premium Quote',
       popular: true,
     },
     {
-      name: "One-Time Clean",
-      price: "$175",
-      period: " flat",
+      name: 'One-Time Clean',
+      price: 'Starting at $150',
+      period: ' flat',
       features: [
-        "Full deep clean",
-        "Chemical balance",
-        "Filter check",
-        "No commitment",
-        "Perfect for parties"
+        'Full deep clean',
+        'Chemical balance',
+        'Filter check',
+        'No commitment',
+        'Perfect for parties',
       ],
-      cta: "Book One-Time",
+      cta: 'Book One-Time',
       popular: false,
     },
   ];
@@ -447,45 +508,119 @@ const Pricing = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-charcoal/60">Prices may vary based on pool size. Get an exact quote below.</p>
+          <p className="text-charcoal/60">All prices vary by pool size and condition. Request your personalized quote below.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start">
           {plans.map((plan, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className={`relative p-10 rounded-3xl border ${plan.popular ? 'bg-white border-deep-blue shadow-2xl scale-105 z-10' : 'bg-white/50 border-silver/20'}`}
+              transition={{ delay: i * 0.1 }}
+              className={`relative p-10 rounded-3xl border ${
+                plan.popular
+                  ? 'bg-white border-2 border-pool-blue shadow-2xl shadow-pool-blue/20'
+                  : 'bg-white/50 border-silver/20'
+              }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-deep-blue text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pool-blue text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
                   Most Popular
                 </div>
               )}
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-              <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <span className="text-charcoal/60">{plan.period}</span>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-2xl font-bold">{plan.price}</span>
+                <span className="text-charcoal/60 text-sm">{plan.period}</span>
               </div>
+              <a href="#contact" className="text-pool-blue text-sm font-semibold hover:underline block mb-8">
+                Exact quote in 60 sec →
+              </a>
               <ul className="space-y-4 mb-10">
                 {plan.features.map((feature, j) => (
                   <li key={j} className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 size={18} className="text-deep-blue flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-pool-blue flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
-              <a 
-                href="#contact" 
-                className={`block w-full py-4 rounded-xl text-center font-bold transition-all ${plan.popular ? 'bg-deep-blue text-white hover:bg-deep-blue/90' : 'bg-silver/20 text-charcoal hover:bg-silver/30'}`}
+              <a
+                href="#contact"
+                className={`block w-full py-4 rounded-xl text-center font-bold transition-all ${
+                  plan.popular
+                    ? 'bg-pool-blue text-white hover:bg-pool-blue/90'
+                    : 'bg-silver/20 text-charcoal hover:bg-silver/30'
+                }`}
               >
                 {plan.cta}
               </a>
             </motion.div>
           ))}
+
+          {/* 4th card: Not sure which plan? */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="relative p-10 rounded-3xl border-2 border-dashed border-deep-blue/30 bg-deep-blue/5 flex flex-col items-center justify-center text-center"
+          >
+            <div className="w-16 h-16 bg-deep-blue/10 rounded-full flex items-center justify-center mb-6">
+              <Zap className="text-deep-blue" size={28} />
+            </div>
+            <h3 className="text-2xl font-bold mb-4">Not Sure Which Plan?</h3>
+            <p className="text-charcoal/60 mb-8 leading-relaxed text-sm">
+              Get a personalized quote tailored to your pool's exact size and needs — in 60 seconds.
+            </p>
+            <a
+              href="#contact"
+              className="bg-deep-blue text-white px-8 py-4 rounded-xl font-bold hover:bg-deep-blue/90 transition-all hover:shadow-xl flex items-center gap-2 group"
+            >
+              Get Exact Quote
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </motion.div>
         </div>
+      </div>
+    </section>
+  );
+};
+
+const GalleryStrip = () => {
+  const photos = [
+    'photo-1571902943202-507ec2618e8f',
+    'photo-1561489401-f8ea3131dc68',
+    'photo-1572331165267-854da2b10ccc',
+    'photo-1600585154340-be6161a56a0c',
+    'photo-1544551763-46a013bb70d5',
+  ];
+
+  return (
+    <section className="py-16 bg-charcoal overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
+          Pools We've <span className="text-pool-blue">Transformed</span>
+        </h2>
+      </div>
+      <div className="flex gap-4 overflow-x-auto pb-4 px-6 md:px-12" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.2) rgba(255,255,255,0.05)' }}>
+        {photos.map((photoId, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="flex-shrink-0 w-72 h-48 md:w-96 md:h-64 rounded-2xl overflow-hidden relative group"
+          >
+            <img
+              src={`https://images.unsplash.com/${photoId}?w=600&q=80&auto=format&fit=crop`}
+              alt={`Pool ${i + 1}`}
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.div>
+        ))}
       </div>
     </section>
   );
@@ -493,8 +628,8 @@ const Pricing = () => {
 
 const ServiceAreas = () => {
   const areas = [
-    "Summerlin", "Henderson", "Anthem", "North Las Vegas", 
-    "Southwest Las Vegas", "Spring Valley", "Green Valley", "Rhodes Ranch"
+    'Summerlin', 'Henderson', 'Anthem', 'North Las Vegas',
+    'Southwest Las Vegas', 'Spring Valley', 'Green Valley', 'Rhodes Ranch',
   ];
 
   return (
@@ -503,8 +638,8 @@ const ServiceAreas = () => {
         <h2 className="text-4xl md:text-5xl font-bold mb-12">Proudly Serving the Las Vegas Valley</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {areas.map((area, i) => (
-            <span 
-              key={i} 
+            <span
+              key={i}
               className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-lg font-medium hover:bg-white hover:text-deep-blue transition-all cursor-default"
             >
               {area}
@@ -519,40 +654,56 @@ const ServiceAreas = () => {
 const Testimonials = () => {
   const reviews = [
     {
-      name: "Maria T.",
-      area: "Summerlin",
-      quote: "Silver Blue has been taking care of our pool for 6 months. Always on time, always clean. Best decision we made.",
+      name: 'Maria T.',
+      area: 'Summerlin',
+      quote: 'Silver Blue has been taking care of our pool for 6 months. Always on time, always clean. Best decision we made.',
     },
     {
-      name: "James R.",
-      area: "Henderson",
-      quote: "Finally found a pool company that actually shows up consistently. Highly recommend.",
+      name: 'James R.',
+      area: 'Henderson',
+      quote: 'Finally found a pool company that actually shows up consistently. Highly recommend.',
     },
     {
-      name: "Sandra K.",
-      area: "Anthem",
-      quote: "The water is always perfect. Our kids swim every weekend without issues. Worth every penny.",
+      name: 'Sandra K.',
+      area: 'Anthem',
+      quote: 'The water is always perfect. Our kids swim every weekend without issues. Worth every penny.',
     },
   ];
 
   return (
-    <section className="section-padding bg-white overflow-hidden">
+    <section className="section-padding bg-silver/5 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">What Our Clients Are Saying</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="space-y-8 max-w-4xl mx-auto">
           {reviews.map((review, i) => (
-            <div key={i} className="p-8 rounded-3xl bg-silver/5 border border-silver/20">
-              <div className="flex text-yellow-400 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className={`relative p-10 rounded-3xl bg-white border border-silver/20 shadow-sm ${i % 2 === 0 ? 'mr-0 md:mr-24' : 'ml-0 md:ml-24'}`}
+            >
+              {/* Decorative oversized quote mark */}
+              <div className="absolute -top-4 -left-2 text-[120px] font-serif leading-none text-deep-blue/8 select-none pointer-events-none">"</div>
+              <div className="relative z-10">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
+                </div>
+                <p className="text-xl italic mb-6 leading-relaxed text-charcoal/80">
+                  "{review.quote}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-deep-blue/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-deep-blue font-bold text-sm">{review.name[0]}</span>
+                  </div>
+                  <div>
+                    <p className="font-bold">{review.name}</p>
+                    <p className="text-charcoal/50 text-sm">{review.area}</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-lg italic mb-8 leading-relaxed text-charcoal/80">
-                "{review.quote}"
-              </p>
-              <div>
-                <p className="font-bold text-lg">{review.name}</p>
-                <p className="text-charcoal/60 text-sm">{review.area}</p>
-              </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -566,7 +717,6 @@ const ContactForm = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setFormState('submitting');
-    // Simulate API call
     setTimeout(() => setFormState('success'), 1500);
   };
 
@@ -576,7 +726,7 @@ const ContactForm = () => {
         <div className="lg:w-1/2">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Get Your Free Quote Today</h2>
           <p className="text-xl text-charcoal/60 mb-10">Takes less than 60 seconds. No obligation.</p>
-          
+
           <div className="space-y-8">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
@@ -617,7 +767,7 @@ const ContactForm = () => {
         <div className="lg:w-1/2">
           <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-silver/10">
             {formState === 'success' ? (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-12"
@@ -627,7 +777,7 @@ const ContactForm = () => {
                 </div>
                 <h3 className="text-3xl font-bold mb-4">Quote Request Sent!</h3>
                 <p className="text-charcoal/60 mb-8">Thank you for reaching out. One of our experts will contact you shortly.</p>
-                <button 
+                <button
                   onClick={() => setFormState('idle')}
                   className="text-deep-blue font-bold hover:underline"
                 >
@@ -639,18 +789,18 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-charcoal/70 ml-1">First Name</label>
-                    <input 
+                    <input
                       required
-                      type="text" 
+                      type="text"
                       placeholder="John"
                       className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-charcoal/70 ml-1">Last Name</label>
-                    <input 
+                    <input
                       required
-                      type="text" 
+                      type="text"
                       placeholder="Doe"
                       className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
                     />
@@ -659,18 +809,18 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-charcoal/70 ml-1">Phone Number</label>
-                    <input 
+                    <input
                       required
-                      type="tel" 
+                      type="tel"
                       placeholder="(702) 000-0000"
                       className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-charcoal/70 ml-1">Email Address</label>
-                    <input 
+                    <input
                       required
-                      type="email" 
+                      type="email"
                       placeholder="john@example.com"
                       className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
                     />
@@ -679,9 +829,9 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-charcoal/70 ml-1">Zip Code</label>
-                    <input 
+                    <input
                       required
-                      type="text" 
+                      type="text"
                       placeholder="89101"
                       className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
                     />
@@ -698,13 +848,13 @@ const ContactForm = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-charcoal/70 ml-1">Message (Optional)</label>
-                  <textarea 
+                  <textarea
                     rows={4}
                     placeholder="Tell us about your pool..."
                     className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all resize-none"
                   ></textarea>
                 </div>
-                <button 
+                <button
                   disabled={formState === 'submitting'}
                   type="submit"
                   className="w-full bg-deep-blue text-white py-5 rounded-xl font-bold text-lg hover:bg-deep-blue/90 transition-all hover:shadow-xl active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
@@ -744,7 +894,6 @@ const Footer = () => {
               Las Vegas's most trusted pool cleaning service. Professional, reliable, and fully insured.
             </p>
             <div className="flex gap-4">
-              {/* Social Placeholders */}
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-deep-blue transition-colors cursor-pointer">
                 <span className="text-xs font-bold">FB</span>
               </div>
@@ -815,12 +964,14 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <StatsStrip />
         <Services />
         <HowItWorks />
         <WhyChooseUs />
         <Pricing />
-        <ServiceAreas />
+        <GalleryStrip />
         <Testimonials />
+        <ServiceAreas />
         <ContactForm />
       </main>
       <Footer />
