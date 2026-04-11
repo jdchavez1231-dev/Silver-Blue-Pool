@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Droplets,
@@ -155,10 +156,15 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
+        {/* TODO: Optimize — resize to 1440x810px, compress to ~150KB before deploy */}
         <img
           src="/hero-pool.jpeg"
           alt="Luxury Las Vegas Pool"
           className="w-full h-full object-cover"
+          width={1440}
+          height={810}
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A4F7A]/90 via-[#1A4F7A]/50 to-pool-blue/10"></div>
       </div>
@@ -248,7 +254,7 @@ const StatsStrip = () => {
             key={i}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
             transition={{ delay: i * 0.1 }}
             className="text-center px-8 py-6 md:py-0"
           >
@@ -293,10 +299,12 @@ const Services = () => {
     <section id="services" className="section-padding bg-deep-blue relative overflow-hidden">
       {/* Faded background image */}
       <div className="absolute inset-0 opacity-10">
+        {/* TODO: Optimize — resize to 1920x1080px, compress to ~200KB before deploy */}
         <img
           src="/tech-cleaning-aerial.jpeg"
-          alt=""
+          alt="Pool technician performing aerial cleaning service in Las Vegas"
           className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
 
@@ -314,7 +322,7 @@ const Services = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
               transition={{ delay: i * 0.1 }}
               className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-pool-blue/50 hover:bg-white/10 transition-all group"
             >
@@ -365,7 +373,7 @@ const HowItWorks = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
               transition={{ delay: i * 0.1 }}
               className="relative overflow-hidden rounded-3xl bg-white p-10 shadow-sm border border-silver/20"
             >
@@ -428,10 +436,14 @@ const WhyChooseUs = () => {
         </div>
         <div className="lg:w-1/2 relative">
           <div className="rounded-3xl overflow-hidden shadow-2xl ring-4 ring-pool-blue/20">
+            {/* TODO: Optimize — resize to 800x600px, compress to ~80KB before deploy */}
             <img
               src="/luxury-pool-sunset.jpeg"
               alt="Professional Pool Service"
               className="w-full h-auto"
+              width={800}
+              height={600}
+              loading="lazy"
             />
           </div>
           <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-xl border border-silver/10 hidden md:block">
@@ -456,6 +468,7 @@ const Pricing = () => {
       price: 'Starting at $150',
       period: ' flat',
       badge: 'No Commitment',
+      microCopy: 'Perfect for move-ins & parties →',
       features: [
         'Full deep clean',
         'Chemical balance',
@@ -471,6 +484,7 @@ const Pricing = () => {
       price: 'Starting at $120',
       period: '/month',
       badge: 'Weekly Visits',
+      microCopy: 'Most popular in Summerlin →',
       features: [
         'Weekly pool cleaning',
         'Chemical check & balance',
@@ -486,6 +500,7 @@ const Pricing = () => {
       price: 'Starting at $165',
       period: '/month',
       badge: 'Weekly Visits',
+      microCopy: 'Priority scheduling available →',
       features: [
         'Everything in Standard',
         'Monthly deep clean',
@@ -512,7 +527,7 @@ const Pricing = () => {
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
               transition={{ delay: i * 0.1 }}
               className={`relative p-10 rounded-3xl border ${
                 plan.popular
@@ -536,7 +551,7 @@ const Pricing = () => {
                 <span className="text-charcoal/60 text-sm">{plan.period}</span>
               </div>
               <a href="#contact" className="text-pool-blue text-sm font-semibold hover:underline block mb-8">
-                Exact quote in 60 sec →
+                {plan.microCopy}
               </a>
               <ul className="space-y-4 mb-10">
                 {plan.features.map((feature, j) => (
@@ -563,7 +578,7 @@ const Pricing = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
             transition={{ delay: 0.3 }}
             className="relative p-10 rounded-3xl border-2 border-dashed border-deep-blue/30 bg-deep-blue/5 flex flex-col items-center justify-center text-center"
           >
@@ -612,10 +627,14 @@ const GalleryStrip = () => {
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             className="flex-shrink-0 w-72 h-48 md:w-96 md:h-64 rounded-2xl overflow-hidden relative group"
           >
+            {/* TODO: Optimize — resize to 600x400px, compress to ~50KB each before deploy */}
             <img
               src={photo.src}
               alt={photo.alt}
               className="w-full h-full object-cover"
+              loading="lazy"
+              width={600}
+              height={400}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.div>
@@ -679,7 +698,7 @@ const Testimonials = () => {
               key={i}
               initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
               transition={{ delay: i * 0.15 }}
               className={`relative p-10 rounded-3xl bg-white border border-silver/20 shadow-sm ${i % 2 === 0 ? 'mr-0 md:mr-24' : 'ml-0 md:ml-24'}`}
             >
@@ -711,13 +730,24 @@ const Testimonials = () => {
 };
 
 const ContactForm = () => {
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  // TODO: Sign up at formspree.io, create a form, and replace YOUR_FORM_ID with your actual form ID
+  const [state, handleFormSubmit] = useForm("YOUR_FORM_ID");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [values, setValues] = useState({ firstName: '', lastName: '', phone: '', email: '', zipCode: '' });
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setFormState('submitting');
-    setTimeout(() => setFormState('success'), 1500);
+  const touch = (field: string) => setTouched(p => ({ ...p, [field]: true }));
+  const set = (field: string, val: string) => setValues(p => ({ ...p, [field]: val }));
+
+  const errors = {
+    firstName: !values.firstName ? 'First name is required.' : '',
+    lastName: !values.lastName ? 'Last name is required.' : '',
+    phone: !values.phone ? 'Phone number is required.' : '',
+    email: !values.email ? 'Email is required.' : '',
+    zipCode: !values.zipCode ? 'Zip code is required.' : '',
   };
+
+  const inputClass = "w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all";
+  const labelClass = "block text-sm font-bold text-charcoal/70 ml-1";
 
   return (
     <section id="contact" className="section-padding bg-silver/10">
@@ -733,6 +763,7 @@ const ContactForm = () => {
               </div>
               <div>
                 <p className="text-sm text-charcoal/50 font-bold uppercase tracking-wider">Call or Text</p>
+                {/* TODO: Replace with real phone number */}
                 <a href="tel:7025550123" className="text-xl font-bold hover:text-deep-blue transition-colors">(702) 555-0123</a>
               </div>
             </div>
@@ -765,7 +796,7 @@ const ContactForm = () => {
 
         <div className="lg:w-1/2">
           <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-silver/10">
-            {formState === 'success' ? (
+            {state.succeeded ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -774,91 +805,138 @@ const ContactForm = () => {
                 <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle2 size={40} />
                 </div>
-                <h3 className="text-3xl font-bold mb-4">Quote Request Sent!</h3>
-                <p className="text-charcoal/60 mb-8">Thank you for reaching out. One of our experts will contact you shortly.</p>
-                <button
-                  onClick={() => setFormState('idle')}
-                  className="text-deep-blue font-bold hover:underline"
-                >
-                  Send another request
-                </button>
+                <h3 className="text-2xl font-bold text-deep-blue mb-2">You're all set!</h3>
+                <p className="text-gray-600">We'll reach out within 2 hours. Check your email for confirmation.</p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">First Name</label>
+                    <label htmlFor="firstName" className={labelClass}>First Name</label>
                     <input
+                      id="firstName"
+                      name="firstName"
                       required
                       type="text"
                       placeholder="John"
-                      className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
+                      value={values.firstName}
+                      onChange={e => set('firstName', e.target.value)}
+                      onBlur={() => touch('firstName')}
+                      className={inputClass}
                     />
+                    <ValidationError prefix="First Name" field="firstName" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                    {touched.firstName && errors.firstName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">Last Name</label>
+                    <label htmlFor="lastName" className={labelClass}>Last Name</label>
                     <input
+                      id="lastName"
+                      name="lastName"
                       required
                       type="text"
                       placeholder="Doe"
-                      className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
+                      value={values.lastName}
+                      onChange={e => set('lastName', e.target.value)}
+                      onBlur={() => touch('lastName')}
+                      className={inputClass}
                     />
+                    <ValidationError prefix="Last Name" field="lastName" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                    {touched.lastName && errors.lastName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                    )}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">Phone Number</label>
+                    <label htmlFor="phone" className={labelClass}>Phone Number</label>
                     <input
+                      id="phone"
+                      name="phone"
                       required
                       type="tel"
                       placeholder="(702) 000-0000"
-                      className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
+                      value={values.phone}
+                      onChange={e => set('phone', e.target.value)}
+                      onBlur={() => touch('phone')}
+                      className={inputClass}
                     />
+                    <ValidationError prefix="Phone" field="phone" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                    {touched.phone && errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">Email Address</label>
+                    <label htmlFor="email" className={labelClass}>Email Address</label>
                     <input
+                      id="email"
+                      name="email"
                       required
                       type="email"
                       placeholder="john@example.com"
-                      className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
+                      value={values.email}
+                      onChange={e => set('email', e.target.value)}
+                      onBlur={() => touch('email')}
+                      className={inputClass}
                     />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                    {touched.email && errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">Zip Code</label>
+                    <label htmlFor="zipCode" className={labelClass}>Zip Code</label>
                     <input
+                      id="zipCode"
+                      name="zipCode"
                       required
                       type="text"
                       placeholder="89101"
-                      className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all"
+                      value={values.zipCode}
+                      onChange={e => set('zipCode', e.target.value)}
+                      onBlur={() => touch('zipCode')}
+                      className={inputClass}
                     />
+                    <ValidationError prefix="Zip Code" field="zipCode" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                    {touched.zipCode && errors.zipCode && (
+                      <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-charcoal/70 ml-1">Pool Size</label>
-                    <select className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all appearance-none">
-                      <option>Small</option>
-                      <option>Medium</option>
-                      <option>Large</option>
-                      <option>Not Sure</option>
+                    <label htmlFor="poolSize" className={labelClass}>Pool Size</label>
+                    <select
+                      id="poolSize"
+                      name="poolSize"
+                      required
+                      className={`${inputClass} appearance-none`}
+                    >
+                      <option value="">Select size...</option>
+                      <option value="small">Small</option>
+                      <option value="medium">Medium</option>
+                      <option value="large">Large</option>
+                      <option value="not-sure">Not Sure</option>
                     </select>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-charcoal/70 ml-1">Message (Optional)</label>
+                  <label htmlFor="message" className={labelClass}>Message (Optional)</label>
                   <textarea
+                    id="message"
+                    name="message"
                     rows={4}
                     placeholder="Tell us about your pool..."
-                    className="w-full px-5 py-4 bg-silver/5 border border-silver/20 rounded-xl focus:outline-none focus:border-deep-blue focus:ring-4 focus:ring-deep-blue/5 transition-all resize-none"
+                    className={`${inputClass} resize-none`}
                   ></textarea>
                 </div>
                 <button
-                  disabled={formState === 'submitting'}
+                  disabled={state.submitting}
                   type="submit"
                   className="w-full bg-deep-blue text-white py-5 rounded-xl font-bold text-lg hover:bg-deep-blue/90 transition-all hover:shadow-xl active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
                 >
-                  {formState === 'submitting' ? (
+                  {state.submitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                       Sending...
@@ -882,7 +960,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center mb-6">
+            <a href="/" className="flex items-center mb-6">
               <img
                 src="/logo-horizontal.png"
                 alt="Silver Blue Pool Care"
@@ -892,14 +970,6 @@ const Footer = () => {
             <p className="text-white/50 leading-relaxed mb-6">
               Las Vegas's most trusted pool cleaning service. Professional, reliable, and fully insured.
             </p>
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-deep-blue transition-colors cursor-pointer">
-                <span className="text-xs font-bold">FB</span>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-deep-blue transition-colors cursor-pointer">
-                <span className="text-xs font-bold">IG</span>
-              </div>
-            </div>
           </div>
 
           <div>
@@ -948,8 +1018,8 @@ const Footer = () => {
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-white/40 text-sm">
           <p>© 2026 Silver Blue Pool Care. All rights reserved.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms.html" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
