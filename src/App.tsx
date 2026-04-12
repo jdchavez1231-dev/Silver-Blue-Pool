@@ -210,7 +210,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4 hidden lg:grid"
+            className="hidden lg:grid grid-cols-2 gap-4"
           >
             {stats.map((stat, i) => (
               <motion.div
