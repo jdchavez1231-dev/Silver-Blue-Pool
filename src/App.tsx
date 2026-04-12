@@ -29,7 +29,7 @@ const StickyMobileCTA = () => (
   <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-silver/20 shadow-2xl px-4 py-3">
     <div className="flex gap-3">
       <a
-        href="tel:7028903166"
+        href="tel:7025182817"
         className="flex-1 bg-silver/10 border border-silver/30 text-charcoal py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
       >
         <Phone size={16} />
@@ -73,7 +73,7 @@ const Navbar = () => {
           <img
             src="/logo-horizontal.png"
             alt="Silver Blue Pool Care"
-            className="h-10 w-auto transition-all group-hover:scale-105"
+            className={`h-10 w-auto transition-all group-hover:scale-105 ${isScrolled ? '' : 'brightness-0 invert'}`}
           />
         </a>
 
@@ -196,11 +196,11 @@ const Hero = () => {
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="tel:7028903166"
+                href="tel:7025182817"
                 className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"
               >
                 <Phone size={20} />
-                (702) 890-3166
+                (702) 518-2817
               </a>
             </div>
           </motion.div>
@@ -669,65 +669,6 @@ const ServiceAreas = () => {
   );
 };
 
-const Testimonials = () => {
-  const reviews = [
-    {
-      name: 'Maria T.',
-      area: 'Summerlin',
-      quote: 'Silver Blue has been taking care of our pool for 6 months. Always on time, always clean. Best decision we made.',
-    },
-    {
-      name: 'James R.',
-      area: 'Henderson',
-      quote: 'Finally found a pool company that actually shows up consistently. Highly recommend.',
-    },
-    {
-      name: 'Sandra K.',
-      area: 'Anthem',
-      quote: 'The water is always perfect. Our kids swim every weekend without issues. Worth every penny.',
-    },
-  ];
-
-  return (
-    <section className="section-padding bg-silver/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">What Our Clients Are Saying</h2>
-        <div className="space-y-8 max-w-4xl mx-auto">
-          {reviews.map((review, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
-              transition={{ delay: i * 0.15 }}
-              className={`relative p-10 rounded-3xl bg-white border border-silver/20 shadow-sm ${i % 2 === 0 ? 'mr-0 md:mr-24' : 'ml-0 md:ml-24'}`}
-            >
-              {/* Decorative oversized quote mark */}
-              <div className="absolute -top-4 -left-2 text-[120px] font-serif leading-none text-deep-blue/8 select-none pointer-events-none">"</div>
-              <div className="relative z-10">
-                <div className="flex text-yellow-400 mb-4">
-                  {[...Array(5)].map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
-                </div>
-                <p className="text-xl italic mb-6 leading-relaxed text-charcoal/80">
-                  "{review.quote}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-deep-blue/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-deep-blue font-bold text-sm">{review.name[0]}</span>
-                  </div>
-                  <div>
-                    <p className="font-bold">{review.name}</p>
-                    <p className="text-charcoal/50 text-sm">{review.area}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const ContactForm = () => {
   const [state, handleFormSubmit] = useForm("mjgpndqb");
@@ -763,16 +704,7 @@ const ContactForm = () => {
               <div>
                 <p className="text-sm text-charcoal/50 font-bold uppercase tracking-wider">Call or Text</p>
                 {/* TODO: Replace with real phone number */}
-                <a href="tel:7028903166" className="text-xl font-bold hover:text-deep-blue transition-colors">(702) 890-3166</a>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                <Mail className="text-deep-blue" size={20} />
-              </div>
-              <div>
-                <p className="text-sm text-charcoal/50 font-bold uppercase tracking-wider">Email Us</p>
-                <p className="text-xl font-bold">service@silverbluepool.com</p>
+                <a href="tel:7025182817" className="text-xl font-bold hover:text-deep-blue transition-colors">(702) 518-2817</a>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -963,7 +895,7 @@ const Footer = () => {
               <img
                 src="/logo-horizontal.png"
                 alt="Silver Blue Pool Care"
-                className="h-10 w-auto"
+                className="h-10 w-auto brightness-0 invert"
               />
             </a>
             <p className="text-white/50 leading-relaxed mb-6">
@@ -998,11 +930,7 @@ const Footer = () => {
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-silver" />
-                <a href="tel:7028903166" className="hover:text-white transition-colors">(702) 890-3166</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail size={18} className="text-silver" />
-                <span>service@silverbluepool.com</span>
+                <a href="tel:7025182817" className="hover:text-white transition-colors">(702) 518-2817</a>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin size={18} className="text-silver" />
@@ -1049,7 +977,6 @@ export default function App() {
         <WhyChooseUs />
         <Pricing />
         <GalleryStrip />
-        <Testimonials />
         <ServiceAreas />
         <ContactForm />
       </main>
