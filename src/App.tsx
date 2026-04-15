@@ -165,8 +165,8 @@ const Hero = () => {
               Las Vegas's Most Trusted Pool Care
             </span>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] text-balance">
-              Crystal Clear Pools. <br />
-              <span className="text-pool-blue">Every Single Week.</span>
+              Las Vegas Pool Cleaning. <br />
+              <span className="text-pool-blue">Crystal Clear Results.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-xl">
               Las Vegas's most reliable pool cleaning service — fully insured, background-checked technicians, and a <strong className="text-white">100% satisfaction guarantee</strong> on every visit.
@@ -241,7 +241,7 @@ const Services = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Everything Your Pool Needs</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Las Vegas Pool Cleaning Services</h2>
           <p className="text-lg text-white/60">
             Professional maintenance tailored to the unique demands of the Las Vegas climate.
           </p>
@@ -295,7 +295,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="section-padding bg-silver/10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple. Reliable. Done.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">How Our Las Vegas Pool Service Works</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
