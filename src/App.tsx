@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -17,7 +17,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  Star,
   ArrowRight,
   Filter,
   Zap,
@@ -49,14 +48,7 @@ const StickyMobileCTA = () => (
 // --- Components ---
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { name: 'Services', href: '#services' },
@@ -67,13 +59,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
+    <nav className="fixed top-0 w-full z-50 transition-all duration-300 glass-nav py-5">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         <a href="#" className="flex items-center group">
           <img
             src="/logo-horizontal.png"
             alt="Silver Blue Pool Care"
-            className={`h-10 w-auto transition-all group-hover:scale-105 ${isScrolled ? '' : 'brightness-0 invert'}`}
+            className="h-10 w-auto transition-all group-hover:scale-105 mix-blend-multiply"
           />
         </a>
 
@@ -83,7 +75,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-deep-blue ${isScrolled ? 'text-charcoal' : 'text-white/90'}`}
+              className="text-sm font-medium text-charcoal transition-colors hover:text-deep-blue"
             >
               {link.name}
             </a>
@@ -102,9 +94,9 @@ const Navbar = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <X className={isScrolled ? 'text-charcoal' : 'text-white'} />
+            <X className="text-charcoal" />
           ) : (
-            <Menu className={isScrolled ? 'text-charcoal' : 'text-white'} />
+            <Menu className="text-charcoal" />
           )}
         </button>
       </div>
@@ -145,13 +137,6 @@ const Navbar = () => {
 };
 
 const Hero = () => {
-  const stats = [
-    { number: '500+', label: 'Pools Serviced' },
-    { number: '5+', label: 'Years in Las Vegas' },
-    { number: '4.9★', label: 'Google Rating' },
-    { number: '100%', label: 'Satisfaction' },
-  ];
-
   return (
     <section className="relative min-h-screen flex items-center pt-20 pb-28 md:pb-20 overflow-hidden">
       {/* Background Image with Overlay */}
@@ -166,12 +151,11 @@ const Hero = () => {
           loading="eager"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A4F7A]/90 via-[#1A4F7A]/50 to-pool-blue/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A4F7A]/65 via-[#1A4F7A]/35 to-pool-blue/10"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Headline + CTAs */}
+        <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -204,27 +188,6 @@ const Hero = () => {
               </a>
             </div>
           </motion.div>
-
-          {/* Right: Floating stat cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden lg:grid grid-cols-2 gap-4"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 text-white"
-              >
-                <div className="text-4xl font-bold font-display mb-1">{stat.number}</div>
-                <div className="text-xs text-white/60 uppercase tracking-wider font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </div>
 
@@ -238,38 +201,6 @@ const Hero = () => {
   );
 };
 
-const StatsStrip = () => {
-  const stats = [
-    { number: '500+', label: 'Pools Serviced' },
-    { number: '5+', label: 'Years in Las Vegas' },
-    { number: '4.9★', label: 'Average Rating' },
-    { number: '100%', label: 'Satisfaction Guarantee' },
-  ];
-
-  return (
-    <section className="bg-charcoal py-16 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x divide-white/10">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
-            transition={{ delay: i * 0.1 }}
-            className="text-center px-8 py-6 md:py-0"
-          >
-            <div className="text-5xl md:text-6xl font-bold font-display text-white mb-2">
-              {stat.number}
-            </div>
-            <div className="text-sm text-white/50 uppercase tracking-widest font-medium">
-              {stat.label}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 const Services = () => {
   const services = [
@@ -445,15 +376,6 @@ const WhyChooseUs = () => {
               height={600}
               loading="lazy"
             />
-          </div>
-          <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-2xl shadow-xl border border-silver/10 hidden md:block">
-            <div className="flex items-center gap-4 mb-2">
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
-              </div>
-              <span className="font-bold">4.9/5 Rating</span>
-            </div>
-            <p className="text-sm text-charcoal/60 italic">"The most reliable service in Summerlin."</p>
           </div>
         </div>
       </div>
@@ -895,7 +817,7 @@ const Footer = () => {
               <img
                 src="/logo-horizontal.png"
                 alt="Silver Blue Pool Care"
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto"
               />
             </a>
             <p className="text-white/50 leading-relaxed mb-6">
@@ -971,7 +893,6 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <StatsStrip />
         <Services />
         <HowItWorks />
         <WhyChooseUs />
