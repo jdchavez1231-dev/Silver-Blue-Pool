@@ -55,6 +55,7 @@ const Navbar = () => {
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Service Areas', href: '#areas' },
+    { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -592,6 +593,101 @@ const ServiceAreas = () => {
 };
 
 
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      q: 'How much does pool cleaning cost in Las Vegas?',
+      a: 'Our weekly pool cleaning service in Las Vegas starts at $160/month for standard pools. That covers full skimming, brushing, vacuuming, chemical testing and balancing, and a filter check every visit. One-time cleans start at $150. Prices vary based on pool size and condition — contact us for a free, no-obligation quote.',
+    },
+    {
+      q: 'How often should I have my pool cleaned in Las Vegas?',
+      a: 'In Las Vegas, weekly pool cleaning is strongly recommended. The desert heat, intense UV, and frequent dust storms accelerate chemical loss and algae growth far faster than in milder climates. Skipping a week can turn a clean pool green in as little as 3–5 days during summer. Monthly service is simply not enough in the Las Vegas Valley.',
+    },
+    {
+      q: 'Do you serve Henderson, Summerlin, and other areas outside Las Vegas?',
+      a: 'Yes — we serve the entire Las Vegas Valley including Henderson, Summerlin, Anthem, North Las Vegas, Spring Valley, Green Valley, and Rhodes Ranch. If you\'re unsure whether we cover your neighborhood, just call or text us at (702) 518-2817 and we\'ll confirm right away.',
+    },
+    {
+      q: 'Are your pool technicians licensed and insured in Nevada?',
+      a: 'Yes. All Silver Blue Pool Care technicians are fully licensed, insured, and background-checked. Nevada requires pool service companies to carry proper licensing, and we stay fully compliant. You\'ll never have an unlicensed stranger working around your home.',
+    },
+    {
+      q: 'Do I have to sign a long-term contract?',
+      a: 'No contracts, ever. We earn your business week after week by doing excellent work. You can pause or cancel your service at any time with no fees or penalties. Most of our customers stay with us because they want to — not because they\'re locked in.',
+    },
+    {
+      q: 'My pool has turned green — can you fix it?',
+      a: 'Yes. Green pools in Las Vegas are almost always caused by algae from chemical imbalance. We offer same-day or next-day green pool treatment including shock treatment, algaecide application, and a full brush-down. Most pools clear up within 24–72 hours depending on severity. We\'ll also identify why it happened so it doesn\'t come back.',
+    },
+    {
+      q: 'What does a weekly pool cleaning service include?',
+      a: 'Every weekly visit includes: skimming the surface for leaves and debris, brushing the walls and steps, vacuuming the floor, testing and balancing all water chemistry (pH, chlorine, alkalinity, stabilizer), inspecting the pump and filter, and emptying skimmer and pump baskets. We log every visit so you always know what was done.',
+    },
+    {
+      q: 'How does Las Vegas heat affect my pool chemistry?',
+      a: 'Las Vegas summers are brutal on pool water. High temperatures speed up chlorine burn-off, UV radiation destroys sanitizer faster, and evaporation concentrates minerals and raises pH. A pool that\'s balanced on Monday can be out of range by Thursday. That\'s exactly why consistent weekly service — not monthly or biweekly — is essential for Las Vegas pools.',
+    },
+    {
+      q: 'Can you clean my pool filter?',
+      a: 'Yes. Filter cleaning is included in routine inspections, and we offer deep filter cleaning as a standalone service. Cartridge filters typically need cleaning every 4–6 weeks in Las Vegas due to dust and debris. DE and sand filters need backwashing regularly. A dirty filter makes your pump work harder and lets more algae through — it\'s one of the most overlooked parts of pool maintenance.',
+    },
+    {
+      q: 'Do you offer one-time pool cleaning in Las Vegas?',
+      a: 'Yes, we offer one-time pool cleans starting at $150. This is popular for homeowners preparing for a party, managing a vacation property, or getting a pool back in shape after a long period without service. No commitment required — but most customers switch to weekly service after seeing the difference.',
+    },
+    {
+      q: 'How do I get started with Silver Blue Pool Care?',
+      a: 'It\'s easy. Fill out the quote form on this page or call/text us at (702) 518-2817. We\'ll confirm your service area, give you a price, and schedule your first visit — usually within the same week. No contracts, no setup fees, just clean water.',
+    },
+    {
+      q: 'What payment methods do you accept?',
+      a: 'We accept all major credit and debit cards, Zelle, Venmo, and cash. Invoices are sent monthly. We never ask for payment upfront — you pay after service is completed.',
+    },
+  ];
+
+  return (
+    <section id="faq" className="section-padding bg-white">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-charcoal/60">Everything you need to know about pool cleaning service in Las Vegas.</p>
+        </div>
+        <div className="divide-y divide-silver/30">
+          {faqs.map((faq, i) => (
+            <div key={i}>
+              <button
+                className="w-full text-left py-5 flex justify-between items-start gap-4 group"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                aria-expanded={openIndex === i}
+              >
+                <span className="text-lg font-semibold text-charcoal group-hover:text-deep-blue transition-colors pr-4">{faq.q}</span>
+                <span className="text-deep-blue font-bold text-2xl leading-none mt-0.5 shrink-0">
+                  {openIndex === i ? '−' : '+'}
+                </span>
+              </button>
+              <AnimatePresence initial={false}>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-6 text-charcoal/70 leading-relaxed">{faq.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ContactForm = () => {
   const [state, handleFormSubmit] = useForm("mjgpndqb");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -899,6 +995,7 @@ export default function App() {
         <Pricing />
         <GalleryStrip />
         <ServiceAreas />
+        <FAQ />
         <ContactForm />
       </main>
       <Footer />
