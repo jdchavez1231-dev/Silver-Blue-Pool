@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -24,26 +24,46 @@ import {
 } from 'lucide-react';
 
 // --- Sticky Mobile CTA ---
-const StickyMobileCTA = () => (
-  <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-silver/20 shadow-2xl px-4 py-3">
-    <div className="flex gap-3">
-      <a
-        href="tel:7025182817"
-        className="flex-1 bg-silver/10 border border-silver/30 text-charcoal py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
-      >
-        <Phone size={16} />
-        Call Now
-      </a>
-      <a
-        href="#contact"
-        className="flex-1 bg-deep-blue text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
-      >
-        Get Free Quote
-        <ArrowRight size={16} />
-      </a>
+const StickyMobileCTA = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-silver/20 shadow-2xl px-4 pt-3 transition-transform duration-300 ${
+        visible ? 'translate-y-0' : 'translate-y-full'
+      }`}
+      style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
+    >
+      <div className="flex gap-3">
+        <a
+          href="tel:7025182817"
+          className="flex-1 bg-silver/10 border border-silver/30 text-charcoal py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
+        >
+          <Phone size={16} />
+          Call Now
+        </a>
+        <a
+          href="#contact"
+          className="flex-1 bg-deep-blue text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
+        >
+          Get Free Quote
+          <ArrowRight size={16} />
+        </a>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // --- Components ---
 
@@ -138,7 +158,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-28 md:pb-20 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center pt-20 pb-28 md:pb-20 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         {/* TODO: Optimize — resize to 1440x810px, compress to ~150KB before deploy */}
