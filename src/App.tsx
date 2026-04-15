@@ -53,7 +53,6 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Services', href: '#services' },
     { name: 'How It Works', href: '#how-it-works' },
-    { name: 'Pricing', href: '#pricing' },
     { name: 'Service Areas', href: '#areas' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
@@ -384,147 +383,6 @@ const WhyChooseUs = () => {
   );
 };
 
-const Pricing = () => {
-  const plans = [
-    {
-      name: 'One-Time Clean',
-      price: 'Starting at $150',
-      period: ' flat',
-      badge: 'No Commitment',
-      microCopy: 'Perfect for move-ins & parties →',
-      features: [
-        'Full deep clean',
-        'Chemical balance',
-        'Filter check',
-        'Single visit — no contracts',
-        'Perfect for parties or move-ins',
-      ],
-      cta: 'Book a One-Time Visit',
-      popular: false,
-    },
-    {
-      name: 'Standard',
-      price: 'Starting at $120',
-      period: '/month',
-      badge: 'Weekly Visits',
-      microCopy: 'Most popular in Summerlin →',
-      features: [
-        'Weekly pool cleaning',
-        'Chemical check & balance',
-        'Filter inspection',
-        'Skimming & brushing',
-        'Vacuuming as needed',
-      ],
-      cta: 'Get Standard Quote',
-      popular: false,
-    },
-    {
-      name: 'Premium',
-      price: 'Starting at $165',
-      period: '/month',
-      badge: 'Weekly Visits',
-      microCopy: 'Priority scheduling available →',
-      features: [
-        'Everything in Standard',
-        'Monthly deep clean',
-        'Priority scheduling',
-        'Tile scrubbing',
-        'Equipment health report',
-      ],
-      cta: 'Get Premium Quote',
-      popular: true,
-    },
-  ];
-
-  return (
-    <section id="pricing" className="section-padding bg-silver/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-charcoal/60">Need a one-time visit or regular weekly service? We do both — no long-term contracts required. Prices vary by pool size.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
-              transition={{ delay: i * 0.1 }}
-              className={`relative p-10 rounded-3xl border ${
-                plan.popular
-                  ? 'bg-white border-2 border-pool-blue shadow-2xl shadow-pool-blue/20'
-                  : 'bg-white/50 border-silver/20'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-pool-blue text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-                  Most Popular
-                </div>
-              )}
-              <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
-              {plan.badge && (
-                <span className="inline-block text-xs font-semibold text-pool-blue bg-pool-blue/10 px-3 py-0.5 rounded-full mb-3">
-                  {plan.badge}
-                </span>
-              )}
-              <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-2xl font-bold">{plan.price}</span>
-                <span className="text-charcoal/60 text-sm">{plan.period}</span>
-              </div>
-              <a href="#contact" className="text-pool-blue text-sm font-semibold hover:underline block mb-8">
-                {plan.microCopy}
-              </a>
-              <ul className="space-y-4 mb-10">
-                {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-3 text-sm">
-                    <CheckCircle2 size={18} className="text-pool-blue flex-shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="#contact"
-                className={`block w-full py-4 rounded-xl text-center font-bold transition-all ${
-                  plan.popular
-                    ? 'bg-pool-blue text-white hover:bg-pool-blue/90'
-                    : 'bg-silver/20 text-charcoal hover:bg-silver/30'
-                }`}
-              >
-                {plan.cta}
-              </a>
-            </motion.div>
-          ))}
-
-          {/* 4th card: Not sure which plan? */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0, margin: "0px 0px -50px 0px" }}
-            transition={{ delay: 0.3 }}
-            className="relative p-10 rounded-3xl border-2 border-dashed border-deep-blue/30 bg-deep-blue/5 flex flex-col items-center justify-center text-center"
-          >
-            <div className="w-16 h-16 bg-deep-blue/10 rounded-full flex items-center justify-center mb-6">
-              <Zap className="text-deep-blue" size={28} />
-            </div>
-            <h3 className="text-2xl font-bold mb-4">Not Sure Which Plan?</h3>
-            <p className="text-charcoal/60 mb-8 leading-relaxed text-sm">
-              Get a personalized quote tailored to your pool's exact size and needs — in 60 seconds.
-            </p>
-            <a
-              href="#contact"
-              className="bg-deep-blue text-white px-8 py-4 rounded-xl font-bold hover:bg-deep-blue/90 transition-all hover:shadow-xl flex items-center gap-2 group"
-            >
-              Get Exact Quote
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const GalleryStrip = () => {
   const photos = [
@@ -937,7 +795,6 @@ const Footer = () => {
             <ul className="space-y-4 text-white/60">
               <li><a href="#services" className="hover:text-white transition-colors">Our Services</a></li>
               <li><a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing Plans</a></li>
               <li><a href="#areas" className="hover:text-white transition-colors">Service Areas</a></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact Us</a></li>
             </ul>
@@ -992,7 +849,6 @@ export default function App() {
         <Services />
         <HowItWorks />
         <WhyChooseUs />
-        <Pricing />
         <GalleryStrip />
         <ServiceAreas />
         <FAQ />
