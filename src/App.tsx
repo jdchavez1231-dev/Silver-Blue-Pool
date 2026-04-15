@@ -24,19 +24,23 @@ import {
 } from 'lucide-react';
 
 // --- Sticky Mobile CTA ---
-const StickyMobileCTA = () => {
+const StickyMobileCTA = ({ onVisibleChange }: { onVisibleChange: (v: boolean) => void }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById('hero');
     if (!hero) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setVisible(!entry.isIntersecting),
+      ([entry]) => {
+        const show = !entry.isIntersecting;
+        setVisible(show);
+        onVisibleChange(show);
+      },
       { threshold: 0 }
     );
     observer.observe(hero);
     return () => observer.disconnect();
-  }, []);
+  }, [onVisibleChange]);
 
   return (
     <div
@@ -875,8 +879,10 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [ctaVisible, setCtaVisible] = useState(false);
+
   return (
-    <div className="font-sans selection:bg-deep-blue selection:text-white pb-[72px] md:pb-0">
+    <div className={`font-sans selection:bg-deep-blue selection:text-white md:pb-0 transition-[padding] duration-300 ${ctaVisible ? 'pb-[72px]' : 'pb-0'}`}>
       <Navbar />
       <main>
         <Hero />
@@ -889,7 +895,7 @@ export default function App() {
         <ContactForm />
       </main>
       <Footer />
-      <StickyMobileCTA />
+      <StickyMobileCTA onVisibleChange={setCtaVisible} />
     </div>
   );
 }
