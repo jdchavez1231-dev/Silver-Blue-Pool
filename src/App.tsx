@@ -197,7 +197,7 @@ const Hero = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="#contact"
+                href="#firstName"
                 className="bg-white text-deep-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-white/90 transition-all hover:shadow-xl flex items-center justify-center gap-2 group"
               >
                 Get a Free Quote
