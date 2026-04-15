@@ -787,6 +787,15 @@ const Footer = () => {
               >
                 <span className="text-xs font-bold">IG</span>
               </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61573260552134"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Silver Blue Pool Care on Facebook"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-deep-blue transition-colors"
+              >
+                <span className="text-xs font-bold">FB</span>
+              </a>
             </div>
           </div>
 
