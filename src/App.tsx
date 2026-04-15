@@ -58,7 +58,7 @@ const StickyMobileCTA = ({ onVisibleChange }: { onVisibleChange: (v: boolean) =>
           Call Now
         </a>
         <a
-          href="#contact"
+          href="#firstName"
           className="flex-1 bg-deep-blue text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
         >
           Get Free Quote
@@ -649,6 +649,7 @@ const ContactForm = () => {
                       name="firstName"
                       required
                       type="text"
+                      style={{ scrollMarginTop: '100px' }}
                       placeholder="John"
                       value={values.firstName}
                       onChange={e => set('firstName', e.target.value)}
