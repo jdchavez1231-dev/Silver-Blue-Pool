@@ -749,9 +749,14 @@ const ContactForm = () => {
                       Sending...
                     </>
                   ) : (
-                    'Send My Quote Request'
+                    'Get My Free Quote →'
                   )}
                 </button>
+                <div className="flex items-center justify-center gap-6 pt-2 text-xs text-charcoal/40">
+                  <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-green-500" /> No contracts</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-green-500" /> Response within 2 hrs</span>
+                  <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-green-500" /> 100% free quote</span>
+                </div>
               </form>
             )}
           </div>
